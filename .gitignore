@@ -1,0 +1,11 @@
+/config
+.DS_Store
+node_modules
+*.swp
+*.log
+.floo*
+.env
+build
+*.ignore
+.idea
+.vscode

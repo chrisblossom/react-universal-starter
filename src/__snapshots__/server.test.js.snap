@@ -1,0 +1,68 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`getScripts 1`] = `
+Object {
+  "preload": Array [
+    <link
+      as="script"
+      href="/dist/bootstrap.js"
+      rel="preload"
+/>,
+    <link
+      as="script"
+      href="/dist/main.cb66a042.js"
+      rel="preload"
+/>,
+  ],
+  "scripts": Array [
+    <script
+      defer={true}
+      src="/dist/bootstrap.js"
+      type="text/javascript"
+/>,
+    <script
+      defer={true}
+      src="/dist/main.cb66a042.js"
+      type="text/javascript"
+/>,
+  ],
+}
+`;
+
+exports[`getStyles 1`] = `
+Array [
+  <link
+    charSet="UTF-8"
+    href="/dist/main.css"
+    media="screen, projection"
+    rel="stylesheet"
+    type="text/css"
+/>,
+  <link
+    charSet="UTF-8"
+    href="/dist/second.css"
+    media="screen, projection"
+    rel="stylesheet"
+    type="text/css"
+/>,
+]
+`;
+
+exports[`getStyles 2`] = `
+Array [
+  <link
+    charSet="UTF-8"
+    href="/dist/main.css"
+    media="screen, projection"
+    rel="stylesheet"
+    type="text/css"
+/>,
+  <link
+    charSet="UTF-8"
+    href="/dist/second.css"
+    media="screen, projection"
+    rel="stylesheet"
+    type="text/css"
+/>,
+]
+`;
