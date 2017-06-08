@@ -181,7 +181,7 @@ if (__DEVELOPMENT__ === true) {
     } else {
         client.plugins.unshift(
             new ExtractTextPlugin({
-                filename: '[name].[chunkhash:8].css',
+                filename: '[name].[contenthash:8].css',
                 allChunks: true,
             })
         );
@@ -207,7 +207,7 @@ if (__DEVELOPMENT__ === false) {
     client.plugins.unshift(
         new webpack.HashedModuleIdsPlugin(),
         new ExtractTextPlugin({
-            filename: '[name].[chunkhash:8].css',
+            filename: '[name].[contenthash:8].css',
             allChunks: true,
         }),
         new webpack.optimize.UglifyJsPlugin({
