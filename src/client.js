@@ -2,22 +2,29 @@
 
 import 'babel-polyfill';
 import React from 'react';
+import AppContainer from 'react-hot-loader/lib/AppContainer';
 import { render } from 'react-dom';
 
 import App from './app';
 
 const htmlTargetDivId = document.getElementById('root');
 
-function renderClient() {
-    render(<App />, htmlTargetDivId);
+function renderClient(Entry) {
+    render(
+        <AppContainer>
+            <Entry />
+        </AppContainer>,
+        htmlTargetDivId,
+    );
 }
 
-renderClient();
+renderClient(App);
 
-if (__DEVELOPMENT__ && module.hot) {
+if (__HMR__ && module.hot) {
     // $FlowFixMe
     module.hot.accept('./app', () => {
-        renderClient();
+        const HotApp = require('./app').default;
+        renderClient(HotApp);
     });
 }
 

@@ -2,27 +2,12 @@
 
 import React, { Component } from 'react';
 import Loadable from 'react-loadable';
-
-type Props = {
-    isLoading: boolean,
-    error: Error | null,
-    pastDelay: null,
-};
-
-const MyLoadingComponent = ({ isLoading, error, pastDelay }: Props) => {
-    if (isLoading) {
-        return pastDelay ? <div>Loading...</div> : null; // Don't flash "Loading..." when we don't need to.
-    } else if (error) {
-        return <div>Error! Component failed to load</div>;
-    }
-    return null;
-};
+import Test from './test';
 
 const LoadableMyComponent = Loadable({
     loader: () => {
         return import('./app2');
     },
-    LoadingComponent: MyLoadingComponent,
 });
 
 export default class Application extends Component {
@@ -33,6 +18,7 @@ export default class Application extends Component {
     render() {
         return (
             <div>
+                <Test />
                 app1
                 <LoadableMyComponent />
             </div>

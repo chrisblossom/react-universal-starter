@@ -14,6 +14,5 @@ const globals = {
           process.env.HMR === 'true' && process.env.NODE_ENV !== 'production'
         : false,
 };
-console.log(globals);
 
 module.exports = globals;
