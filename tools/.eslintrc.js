@@ -1,5 +1,11 @@
 'use strict';
 
+/**
+ * /tools should be in es6.
+ * Although babel-node is called on the build tools, certain files are called from the App
+ * which will not accept unsupported JS features.
+ */
+
 module.exports = {
     parserOptions: {
         ecmaVersion: 6,
