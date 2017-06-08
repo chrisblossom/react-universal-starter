@@ -2,7 +2,6 @@
 
 import React, { Component } from 'react';
 import Loadable from 'react-loadable';
-import Test from './test';
 
 const LoadableMyComponent = Loadable({
     loader: () => {
@@ -18,7 +17,6 @@ export default class Application extends Component {
     render() {
         return (
             <div>
-                <Test />
                 app1
                 <LoadableMyComponent />
             </div>
