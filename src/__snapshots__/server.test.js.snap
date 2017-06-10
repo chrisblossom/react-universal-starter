@@ -47,22 +47,3 @@ Array [
 />,
 ]
 `;
-
-exports[`getStyles 2`] = `
-Array [
-  <link
-    charSet="UTF-8"
-    href="/dist/main.css"
-    media="screen, projection"
-    rel="stylesheet"
-    type="text/css"
-/>,
-  <link
-    charSet="UTF-8"
-    href="/dist/second.css"
-    media="screen, projection"
-    rel="stylesheet"
-    type="text/css"
-/>,
-]
-`;
