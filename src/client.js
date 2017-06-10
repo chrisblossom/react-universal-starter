@@ -9,10 +9,10 @@ import App from './app';
 
 const htmlTargetDivId = document.getElementById('root');
 
-function renderClient(Entry) {
+function renderClient(Component) {
     render(
         <AppContainer>
-            <Entry />
+            <Component />
         </AppContainer>,
         htmlTargetDivId,
     );
@@ -23,8 +23,7 @@ renderClient(App);
 if (__HMR__ && module.hot) {
     // $FlowFixMe
     module.hot.accept('./app', () => {
-        const HotApp = require('./app').default;
-        renderClient(HotApp);
+        renderClient(App);
     });
 }
 

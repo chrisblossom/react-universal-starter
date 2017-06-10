@@ -82,9 +82,11 @@ function Html({ clientStats, outputPath }: PropsType) {
 
     const moduleIds = flushWebpackRequireWeakIds();
 
-    const assets = flushChunks(moduleIds, clientStats, {
+    const assets = flushChunks(clientStats, {
         before: ['bootstrap'],
         after: ['main'],
+
+        moduleIds,
 
         // only needed if serving css rather than an external stylesheet
         outputPath,
