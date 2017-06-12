@@ -146,7 +146,6 @@ const client = {
             })
         ),
 
-        new webpack.NamedModulesPlugin(), // only needed when server built with webpack
         new webpack.optimize.CommonsChunkPlugin({
             names: ['bootstrap'], // needed to put webpack bootstrap code before chunks
             filename: '[name].js',
