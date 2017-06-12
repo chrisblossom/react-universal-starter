@@ -167,9 +167,9 @@ if (__DEVELOPMENT__ === true) {
             .options.plugins.unshift('react-hot-loader/babel');
 
         client.entry.main.unshift(
+            'eventsource-polyfill',
             'webpack-hot-middleware/client?path=/__webpack_hmr&timeout=20000&reload=false&quiet=false&noInfo=false',
-            'react-hot-loader/patch',
-            'eventsource-polyfill'
+            'react-hot-loader/patch'
         );
 
         client.plugins.unshift(
