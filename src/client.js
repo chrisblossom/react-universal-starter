@@ -2,7 +2,6 @@
 
 import 'babel-polyfill';
 import React from 'react';
-import AppContainer from 'react-hot-loader/lib/AppContainer';
 import { render } from 'react-dom';
 
 import App from './app';
@@ -10,12 +9,20 @@ import App from './app';
 const htmlTargetDivId = document.getElementById('root');
 
 function renderClient(Component) {
-    render(
-        <AppContainer>
-            <Component />
-        </AppContainer>,
-        htmlTargetDivId,
-    );
+    if (__HMR__) {
+        const AppContainer = require('react-hot-loader/lib/AppContainer');
+
+        render(
+            <AppContainer>
+                <Component />
+            </AppContainer>,
+            htmlTargetDivId,
+        );
+
+        return;
+    }
+
+    render(<Component />, htmlTargetDivId);
 }
 
 renderClient(App);
