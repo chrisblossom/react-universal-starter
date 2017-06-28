@@ -1,29 +1,16 @@
-// @flow
+/* @flow */
 
 import React, { Component } from 'react';
-import Loadable from 'react-loadable';
+import universal from 'react-universal-component';
 
-type Props = {
-    isLoading: boolean,
-    error: Error | null,
-    pastDelay: null,
-};
+import styles from './app.css';
 
-const MyLoadingComponent = ({ isLoading, error, pastDelay }: Props) => {
-    if (isLoading) {
-        return pastDelay ? <div>Loading...</div> : null; // Don't flash "Loading..." when we don't need to.
-    } else if (error) {
-        return <div>Error! Component failed to load</div>;
-    }
-    return null;
-};
-
-const LoadableMyComponent = Loadable({
-    loader: () => {
-        return import('./app2');
+const LoadableMyComponent = universal(
+    () => import(/* webpackChunkName: 'app2' */ './app2'),
+    {
+        resolve: () => require.resolveWeak('./app2'),
     },
-    LoadingComponent: MyLoadingComponent,
-});
+);
 
 export default class Application extends Component {
     componentDidMount() {
@@ -33,7 +20,9 @@ export default class Application extends Component {
     render() {
         return (
             <div>
-                app1
+                <div className={styles.app}>
+                    app1
+                </div>
                 <LoadableMyComponent />
             </div>
         );

@@ -67,13 +67,6 @@ const client = {
                             plugins: [
                                 'syntax-dynamic-import',
                                 'transform-object-rest-spread',
-                                [
-                                    'react-loadable/babel',
-                                    {
-                                        server: true,
-                                        webpack: true,
-                                    },
-                                ],
                             ],
                         },
                     },
@@ -146,7 +139,6 @@ const client = {
             })
         ),
 
-        new webpack.NamedModulesPlugin(), // only needed when server built with webpack
         new webpack.optimize.CommonsChunkPlugin({
             names: ['bootstrap'], // needed to put webpack bootstrap code before chunks
             filename: '[name].js',
@@ -168,9 +160,9 @@ if (__DEVELOPMENT__ === true) {
             .options.plugins.unshift('react-hot-loader/babel');
 
         client.entry.main.unshift(
+            'eventsource-polyfill',
             'webpack-hot-middleware/client?path=/__webpack_hmr&timeout=20000&reload=false&quiet=false&noInfo=false',
-            'react-hot-loader/patch',
-            'eventsource-polyfill'
+            'react-hot-loader/patch'
         );
 
         client.plugins.unshift(
@@ -181,7 +173,7 @@ if (__DEVELOPMENT__ === true) {
     } else {
         client.plugins.unshift(
             new ExtractTextPlugin({
-                filename: '[name].[chunkhash:8].css',
+                filename: '[name].[contenthash:8].css',
                 allChunks: true,
             })
         );
@@ -207,7 +199,7 @@ if (__DEVELOPMENT__ === false) {
     client.plugins.unshift(
         new webpack.HashedModuleIdsPlugin(),
         new ExtractTextPlugin({
-            filename: '[name].[chunkhash:8].css',
+            filename: '[name].[contenthash:8].css',
             allChunks: true,
         }),
         new webpack.optimize.UglifyJsPlugin({

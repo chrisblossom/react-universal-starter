@@ -8,16 +8,29 @@ import App from './app';
 
 const htmlTargetDivId = document.getElementById('root');
 
-function renderClient() {
-    render(<App />, htmlTargetDivId);
+function renderClient(Component) {
+    if (__HMR__) {
+        const AppContainer = require('react-hot-loader/lib/AppContainer');
+
+        render(
+            <AppContainer>
+                <Component />
+            </AppContainer>,
+            htmlTargetDivId,
+        );
+
+        return;
+    }
+
+    render(<Component />, htmlTargetDivId);
 }
 
-renderClient();
+renderClient(App);
 
-if (__DEVELOPMENT__ && module.hot) {
+if (__HMR__ && module.hot) {
     // $FlowFixMe
     module.hot.accept('./app', () => {
-        renderClient();
+        renderClient(App);
     });
 }
 

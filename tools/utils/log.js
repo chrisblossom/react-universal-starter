@@ -14,13 +14,13 @@ function getTime() {
     };
 
     const now = new Date();
+    const hours = addZero(now.getHours());
+    const minutes = addZero(now.getMinutes());
+    const seconds = addZero(now.getSeconds());
+
     return {
         time: now,
-        message: `[${gray(
-            `${addZero(now.getHours())}:${addZero(now.getMinutes())}:${addZero(
-                now.getSeconds()
-            )}`
-        )}]`,
+        message: `[${gray(`${hours}:${minutes}:${seconds}`)}]`,
     };
 }
 

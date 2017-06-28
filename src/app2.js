@@ -2,7 +2,7 @@
 
 import React from 'react';
 
-import styles from './app.css';
+import styles from './app2.css';
 
 const App2 = () => {
     return (

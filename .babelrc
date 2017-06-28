@@ -1,10 +1,3 @@
 {
-  "presets": ["./.babelrc.js"],
-
-  "env": {
-    "test": {
-      "presets": ["react"],
-      "plugins": ["dynamic-import-node"]
-    }
-  }
+    "presets": ["./.babelrc.js"]
 }

@@ -5,12 +5,16 @@
 'use strict';
 
 const webpack = require('webpack');
-const NodeExternals = require('webpack-node-externals');
+const nodeExternals = require('webpack-node-externals');
 const config = require('../config/env');
 const shared = require('./shared');
 
-const nodeModules = new NodeExternals({
-    whitelist: ['react-loadable', 'webpack-flush-chunks'],
+const nodeModules = nodeExternals({
+    whitelist: [
+        /^react-universal-component/,
+        /^require-universal-module/,
+        /^webpack-flush-chunks/,
+    ],
 });
 
 const { __DEVELOPMENT__, __PRODUCTION_RELEASE__ } = config.globals;
@@ -77,13 +81,6 @@ const server = {
                             plugins: [
                                 'syntax-dynamic-import',
                                 'transform-object-rest-spread',
-                                [
-                                    'react-loadable/babel',
-                                    {
-                                        server: true,
-                                        webpack: true,
-                                    },
-                                ],
                             ],
                         },
                     },

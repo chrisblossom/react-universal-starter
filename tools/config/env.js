@@ -24,11 +24,12 @@ const config = {
             ? process.env.NODE_ENV === 'development'
             : true,
 
-        __HMR__: process.env.RUN_MODE === 'start' && process.env.HMR
-            ? // Always disable HMR in production-like environments
-              process.env.HMR === 'true' &&
+        __HMR__:
+            process.env.RUN_MODE === 'start' && process.env.HMR
+                ? // Always disable HMR in production-like environments
+                  process.env.HMR === 'true' &&
                   process.env.NODE_ENV !== 'production'
-            : false,
+                : false,
     },
 };
 

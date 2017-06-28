@@ -9,3 +9,4 @@ build
 *.ignore
 .idea
 .vscode
+.cache
