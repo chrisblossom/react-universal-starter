@@ -17,7 +17,7 @@ export default class Application extends Component {
     render() {
         return (
             <div>
-                app1
+               app1
                 <LoadableMyComponent />
             </div>
         );
