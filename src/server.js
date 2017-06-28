@@ -4,7 +4,7 @@ import React from 'react';
 import { renderToStaticMarkup, renderToString } from 'react-dom/server';
 import { existsSync } from 'fs';
 import path from 'path';
-import { flushWebpackRequireWeakIds } from 'react-loadable';
+import { flushModuleIds } from 'react-universal-component/server';
 
 import flushChunks from 'webpack-flush-chunks';
 
@@ -80,7 +80,7 @@ type PropsType = {
 function Html({ clientStats, outputPath }: PropsType) {
     const content = renderToString(<App />);
 
-    const moduleIds = flushWebpackRequireWeakIds();
+    const moduleIds = flushModuleIds();
 
     const assets = flushChunks(clientStats, {
         before: ['bootstrap'],

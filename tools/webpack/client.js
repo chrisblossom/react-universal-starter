@@ -67,13 +67,6 @@ const client = {
                             plugins: [
                                 'syntax-dynamic-import',
                                 'transform-object-rest-spread',
-                                [
-                                    'react-loadable/babel',
-                                    {
-                                        server: true,
-                                        webpack: true,
-                                    },
-                                ],
                             ],
                         },
                     },

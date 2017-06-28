@@ -1,13 +1,16 @@
-// @flow
+/* @flow */
 
 import React, { Component } from 'react';
-import Loadable from 'react-loadable';
+import universal from 'react-universal-component';
 
-const LoadableMyComponent = Loadable({
-    loader: () => {
-        return import('./app2');
+import styles from './app.css';
+
+const LoadableMyComponent = universal(
+    () => import(/* webpackChunkName: 'app2' */ './app2'),
+    {
+        resolve: () => require.resolveWeak('./app2'),
     },
-});
+);
 
 export default class Application extends Component {
     componentDidMount() {
@@ -17,7 +20,9 @@ export default class Application extends Component {
     render() {
         return (
             <div>
-               app1
+                <div className={styles.app}>
+                    app1
+                </div>
                 <LoadableMyComponent />
             </div>
         );
