@@ -29,8 +29,12 @@ const client = {
 
     output: {
         path: publicPath,
-        filename: '[name].[hash:8].js',
-        chunkFilename: '[name].[chunkhash:8].js',
+        /**
+         * chunkhash does not work with Webpack's HMR
+         * https://github.com/webpack/webpack/issues/2393#issuecomment-216614060
+         */
+        filename: __HMR__ ? '[name].[hash:8].js' : '[name].[chunkhash:8].js',
+        chunkFilename: __HMR__ ? '[name].[hash:8].js' : '[name].[chunkhash:8].js',
         publicPath: '/dist/',
     },
 
@@ -140,8 +144,7 @@ const client = {
         ),
 
         new webpack.optimize.CommonsChunkPlugin({
-            names: ['bootstrap'], // needed to put webpack bootstrap code before chunks
-            filename: '[name].js',
+            names: ['bootstrap'],
             minChunks: Infinity,
         }),
     ],
