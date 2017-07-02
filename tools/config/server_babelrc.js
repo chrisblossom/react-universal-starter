@@ -23,7 +23,11 @@ const babel = {
         'flow',
     ],
 
-    plugins: [['transform-define', define], 'transform-object-rest-spread'],
+    plugins: [
+        ['transform-define', define],
+        'dynamic-import-node',
+        'transform-object-rest-spread',
+    ],
 };
 
 module.exports = babel;
