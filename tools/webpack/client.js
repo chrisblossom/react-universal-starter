@@ -9,6 +9,7 @@ const webpack = require('webpack');
 const path = require('path');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const WriteFilePlugin = require('write-file-webpack-plugin');
+const StatsPlugin = require('stats-webpack-plugin');
 
 const shared = require('./shared');
 const config = require('../config/env');
@@ -34,7 +35,9 @@ const client = {
          * https://github.com/webpack/webpack/issues/2393#issuecomment-216614060
          */
         filename: __HMR__ ? '[name].[hash:8].js' : '[name].[chunkhash:8].js',
-        chunkFilename: __HMR__ ? '[name].[hash:8].js' : '[name].[chunkhash:8].js',
+        chunkFilename: __HMR__
+            ? '[name].[hash:8].js'
+            : '[name].[chunkhash:8].js',
         publicPath: '/dist/',
     },
 
@@ -147,6 +150,8 @@ const client = {
             names: ['bootstrap'],
             minChunks: Infinity,
         }),
+
+        new StatsPlugin('../webpack-stats.json'),
     ],
 };
 
@@ -169,7 +174,10 @@ if (__DEVELOPMENT__ === true) {
         );
 
         client.plugins.unshift(
-            new WriteFilePlugin({ test: /\.css$/, log: false }),
+            new WriteFilePlugin({
+                test: /\.css$|webpack-stats\.json/,
+                log: false,
+            }),
             new ExtractTextPlugin({ filename: '[name].css', allChunks: true }),
             new webpack.HotModuleReplacementPlugin()
         );

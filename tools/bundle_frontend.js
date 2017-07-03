@@ -1,13 +1,7 @@
 /* @flow */
 
-const { writeFileSync } = require('fs');
-const path = require('path');
 const webpack = require('webpack');
 const log = require('./utils/log');
-
-const config = require('./config/env');
-
-const { buildPath } = config.paths;
 
 function writeBundle(webpackBundle) {
     return new Promise(resolve => {
@@ -17,18 +11,6 @@ function writeBundle(webpackBundle) {
                 log.error(error);
 
                 return;
-            }
-
-            if (webpackBundle.name === 'client') {
-                const outputFile = path.resolve(
-                    buildPath,
-                    'webpack-stats.json'
-                );
-                writeFileSync(outputFile, JSON.stringify(stats.toJson()));
-
-                log.info(
-                    `build stats: ${path.relative(buildPath, outputFile)}`
-                );
             }
 
             log.info(

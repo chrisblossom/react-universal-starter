@@ -8,35 +8,23 @@ import path from 'path';
 import express from 'express';
 import http from 'http';
 
+import Renderer from './renderer';
+
 const app = express();
 const server = http.createServer(app);
 
-const rootPath = process.cwd();
 const publicPath = path.resolve(__dirname, '../public');
+const render = new Renderer();
 
 app.set('etag', false);
 app.use('/dist/', express.static(publicPath));
 
-if (__HMR__) {
-    const webpackRoutes = require(path.resolve(
-        rootPath,
-        'tools/webpack/hmr_middleware',
-    ));
-    app.use(webpackRoutes);
-} else {
-    const rendererPath = path.resolve(rootPath, 'build/server-frontend.js');
-    const webpackStatsPath = path.resolve(rootPath, 'build/webpack-stats.json');
 
-    const renderReact = require(rendererPath).default;
-    const webpackStats = require(webpackStatsPath);
+app.use((request, response) => {
+    const rendered = render();
 
-    app.use(
-        renderReact({
-            clientStats: webpackStats,
-            outputPath: publicPath,
-        }),
-    );
-}
+    response.send(`<!DOCTYPE html>${rendered}`);
+});
 
 const port = process.env.PORT ? parseInt(process.env.PORT, 10) : 3000;
 

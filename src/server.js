@@ -1,7 +1,7 @@
 /* @flow */
 
 import React from 'react';
-import { renderToStaticMarkup, renderToString } from 'react-dom/server';
+import { renderToString } from 'react-dom/server';
 import { existsSync } from 'fs';
 import path from 'path';
 import { flushChunkNames } from 'react-universal-component/server';
@@ -125,23 +125,5 @@ function Html({ clientStats, outputPath }: PropsType) {
     );
 }
 
-type Options = {
-    clientStats: Object,
-    outputPath: string,
-};
-
-const html = (options: Options) => {
-    return (
-        request: express$Request,
-        response: express$Response,
-        // eslint-disable-next-line no-unused-vars
-        next: express$NextFunction,
-    ) => {
-        const rendered = renderToStaticMarkup(<Html {...options} />);
-
-        response.send(`<!DOCTYPE html>${rendered}`);
-    };
-};
-
 export { getScripts, getStyles };
-export default html;
+export default Html;

@@ -20,7 +20,7 @@ const babel = {
                 useBuiltIns: true,
             },
         ],
-        'flow',
+        'react',
     ],
 
     plugins: [

@@ -1,14 +1,12 @@
 /* @flow */
 
-const { writeFileSync } = require('fs');
-const path = require('path');
 const webpack = require('webpack');
-const log = require('./utils/log');
 const FriendlyErrorsWebpackPlugin = require('friendly-errors-webpack-plugin');
 
-const envConfig = require('./config/env');
+const browserSync = require('./utils/browser_sync');
 
-const { buildPath } = envConfig.paths;
+const envConfig = require('./config/env');
+const { __HMR__ } = envConfig.globals;
 
 /**
  * Creates application bundles from the source files.
@@ -16,37 +14,12 @@ const { buildPath } = envConfig.paths;
 function watchBundle(webpackBundle) {
     return new Promise(resolve => {
         let finished = false;
-        webpackBundle.watch({}, (error, stats) => {
+        webpackBundle.watch({}, error => {
             if (error) {
                 // log.error(error);
 
                 return;
             }
-
-            if (webpackBundle.name === 'client') {
-                const outputFile = path.resolve(
-                    buildPath,
-                    'webpack-stats.json'
-                );
-                writeFileSync(outputFile, JSON.stringify(stats.toJson()));
-            }
-
-            // if (webpackBundle.name === 'server') {
-            // log.info(
-            //     `${webpackBundle.name} ${stats
-            //         .toString({
-            //             version: false,
-            //             assets: false,
-            //             chunks: false,
-            //             colors: true,
-            //             hash: true,
-            //             modules: false,
-            //             reasons: false,
-            //             source: false,
-            //         })
-            //         .replace(/\n/, ' ')}`,
-            // );
-            // }
 
             if (finished === false) {
                 finished = true;
@@ -76,7 +49,13 @@ async function watchFrontend() {
         return compiler.options.name === 'server';
     });
 
-    await Promise.all([watchBundle(clientBundler), watchBundle(nodeBundler)]);
+    const client = __HMR__
+        ? browserSync(clientBundler)
+        : watchBundle(clientBundler);
+
+    const server = watchBundle(nodeBundler);
+
+    await Promise.all([client, server]);
 }
 
 module.exports = watchFrontend;

@@ -5,8 +5,7 @@ const nodemon = require('nodemon');
 const config = require('./config/env');
 const compileServer = require('./utils/compile_server');
 
-const { __HMR__ } = config.globals;
-const { buildPath, rootPath, serverBuildPath } = config.paths;
+const { rootPath, serverBuildPath } = config.paths;
 
 function watchServer() {
     return new Promise(async resolve => {
@@ -17,11 +16,7 @@ function watchServer() {
          */
         nodemon({
             script: path.resolve(rootPath, 'start.js'),
-            /**
-             * Server needs to full reload when HMR is disabled because changes will not be
-             * registered because of require.js's file cache
-             */
-            watch: __HMR__ ? serverBuildPath : buildPath,
+            watch: serverBuildPath,
             // delay: 500,
         });
 
