@@ -19,7 +19,6 @@ const render = new Renderer();
 app.set('etag', false);
 app.use('/dist/', express.static(publicPath));
 
-
 app.use((request, response) => {
     const rendered = render();
 
