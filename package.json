@@ -1,7 +1,7 @@
 {
   "name": "react-universal-starter",
   "version": "1.0.0",
-  "main": "index.js",
+  "main": "start.js",
   "license": "MIT",
   "scripts": {
     "build": "babel-node tools/run build",
@@ -60,7 +60,7 @@
     "friendly-errors-webpack-plugin": "1.6.1",
     "fs-extra": "3.0.1",
     "gzip-size": "3.0.0",
-    "hard-source-webpack-plugin": "0.4.7",
+    "hard-source-webpack-plugin": "0.4.9",
     "husky": "0.14.3",
     "identity-obj-proxy": "3.0.0",
     "jest": "20.0.4",
