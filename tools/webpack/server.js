@@ -142,12 +142,6 @@ const server = {
     },
 
     plugins: [
-        new webpack.BannerPlugin({
-            banner: `require('source-map-support').install();`,
-            raw: true,
-            entryOnly: false,
-        }),
-
         new webpack.optimize.LimitChunkCountPlugin({
             maxChunks: 1,
         }),
