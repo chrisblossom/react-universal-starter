@@ -31,7 +31,13 @@ function compileServer(options: Options = {}) {
             args.splice(1, 0, '--watch');
         }
 
-        const node = spawn('babel', args, {
+        /**
+         * Find the babel-cli bin using require instead of PATH
+         */
+        const babelCliPath = path.parse(require.resolve('babel-cli')).dir;
+        const babelBinPath = path.resolve(babelCliPath, 'bin/babel.js');
+
+        const node = spawn(babelBinPath, args, {
             env: Object.assign({}, process.env, { FORCE_COLOR: 'true' }),
         });
 
