@@ -5,15 +5,23 @@
 git clone https://github.com/chrisblossom/react-universal-starter
 cd react-universal-starter
 
-# open react-universa-starter/.npmrc and replace the authToken with yours from ~/.npmrc
 yarn
-yarn start
 ```
+
+## Usage
+
+- Start Development: ``yarn run start``
+- Start Production: ``yarn run start -- --prod``
+- Build: ``yarn run build``
+- Build Production: ``yarn run build -- --prod``
+
+## .env
+Create ``./env`` and see file ``./.env.example`` for uses.
 
 ## Features
 
-- universal HMR
-- browser sync
-- universal rendering ([react-universal-component](https://github.com/faceyspacey/react-universal-component) + [webpack-flush-chunks](https://github.com/faceyspacey/webpack-flush-chunks))
-- prettier, flow, eslint
-- jest, wallaby
+- Universal HMR
+- Browsersync (for CSS Reloading only)
+- Universal Rendering ([react-universal-component](https://github.com/faceyspacey/react-universal-component) + [webpack-flush-chunks](https://github.com/faceyspacey/webpack-flush-chunks))
+- Prettier, Flow, Eslint
+- Jest, Wallaby
